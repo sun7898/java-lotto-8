@@ -1,8 +1,9 @@
 package lotto;
 
-import lotto.service.LottoService;
 import lotto.util.InputValidator;
+import lotto.service.LottoService;
 import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
 
 import java.util.List;
 
@@ -18,6 +19,10 @@ public class Application {
             System.out.println(lotto.getNumbers());
         }
 
-        // 다음 단계: 당첨 번호 입력 및 당첨 판정
+        List<Integer> winningNumbers = InputValidator.readWinningNumbers();
+        int bonusNumber = InputValidator.readBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+
+        // TODO: LottoService로 당첨 판정, 통계 출력
     }
 }
