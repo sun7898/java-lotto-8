@@ -1,27 +1,27 @@
 package lotto.util;
 
-import java.util.List;
+import camp.nextstep.edu.missionutils.Console;
 
 public class InputValidator {
 
+    public static int readPurchaseAmount() {
+        try {
+            System.out.println("구입금액을 입력해 주세요.");
+            int amount = Integer.parseInt(Console.readLine().trim());
+            validatePurchaseAmount(amount);
+            return amount;
+        } catch (NumberFormatException e) {
+            System.out.println("[ERROR] 숫자를 입력해야 합니다.");
+            return readPurchaseAmount(); // 재귀로 재입력
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return readPurchaseAmount(); // 재귀로 재입력
+        }
+    }
+
     public static void validatePurchaseAmount(int amount) {
-        if (amount < 1000 || amount % 1000 != 0) {
+        if (amount <= 0 || amount % 1000 != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
-        }
-    }
-
-    public static void validateLottoNumbers(List<Integer> numbers) {
-        for (int num : numbers) {
-            if (num < 1 || num > 45) {
-                throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
-            }
-        }
-    }
-
-    // ✅ 추가: 보너스 번호 검증
-    public static void validateBonusNumber(int number) {
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
         }
     }
 }
